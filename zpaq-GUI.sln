@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zpaq-GUI", "zpaq-GUI\zpaq-GUI.csproj", "{DE153A24-C06B-45D2-BDA7-235C211360BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE153A24-C06B-45D2-BDA7-235C211360BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE153A24-C06B-45D2-BDA7-235C211360BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE153A24-C06B-45D2-BDA7-235C211360BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE153A24-C06B-45D2-BDA7-235C211360BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C2C98FF-E5EB-410E-9E32-BD3694F732F4}
+	EndGlobalSection
+EndGlobal
