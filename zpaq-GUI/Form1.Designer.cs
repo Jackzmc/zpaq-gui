@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ColumnHeader filesize;
-            this.label1 = new System.Windows.Forms.Label();
+            this.version = new System.Windows.Forms.Label();
             this.dest_txt = new System.Windows.Forms.TextBox();
             this.dest_btn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,7 +39,7 @@
             this.files_add = new System.Windows.Forms.Button();
             this.files_remove = new System.Windows.Forms.Button();
             this.folders_add = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.start_btn = new System.Windows.Forms.Button();
             this.cmd_output = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.command_in = new System.Windows.Forms.TextBox();
@@ -53,15 +53,15 @@
             filesize.Text = "Size";
             filesize.Width = 94;
             // 
-            // label1
+            // version
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 470);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Created by Jackz. ";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.version.AutoSize = true;
+            this.version.Location = new System.Drawing.Point(37, 471);
+            this.version.Name = "version";
+            this.version.Size = new System.Drawing.Size(53, 13);
+            this.version.TabIndex = 0;
+            this.version.Text = "[version?]";
+            this.version.Click += new System.EventHandler(this.label1_Click);
             // 
             // dest_txt
             // 
@@ -147,15 +147,15 @@
             this.folders_add.UseVisualStyleBackColor = true;
             this.folders_add.Click += new System.EventHandler(this.folders_add_Click);
             // 
-            // button1
+            // start_btn
             // 
-            this.button1.Location = new System.Drawing.Point(15, 345);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 44);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.start_btn.Location = new System.Drawing.Point(15, 345);
+            this.start_btn.Name = "start_btn";
+            this.start_btn.Size = new System.Drawing.Size(113, 44);
+            this.start_btn.TabIndex = 9;
+            this.start_btn.Text = "Start";
+            this.start_btn.UseVisualStyleBackColor = true;
+            this.start_btn.Click += new System.EventHandler(this.button1_Click);
             // 
             // cmd_output
             // 
@@ -172,7 +172,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(113, 30);
             this.button2.TabIndex = 11;
-            this.button2.Text = "Extract";
+            this.button2.Text = "Extract GUI";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -214,7 +214,7 @@
             this.Controls.Add(this.command_in);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.cmd_output);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.start_btn);
             this.Controls.Add(this.folders_add);
             this.Controls.Add(this.files_remove);
             this.Controls.Add(this.files_add);
@@ -223,7 +223,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dest_btn);
             this.Controls.Add(this.dest_txt);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.version);
             this.Name = "ZPAQ_Main";
             this.Text = "ZPAQ GUI";
             this.Load += new System.EventHandler(this.ZPAQ_Main_Load);
@@ -234,7 +234,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label version;
         private System.Windows.Forms.TextBox dest_txt;
         private System.Windows.Forms.Button dest_btn;
         private System.Windows.Forms.Label label2;
@@ -244,7 +244,7 @@
         private System.Windows.Forms.Button files_add;
         private System.Windows.Forms.Button files_remove;
         private System.Windows.Forms.Button folders_add;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button start_btn;
         private System.Windows.Forms.RichTextBox cmd_output;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox command_in;

@@ -26,7 +26,7 @@ namespace zpaq_GUI
                 this.Owner.Show();
                 this.Owner.Focus();
             }
-            
+
         }
 
         private void saveloc_btn_Click(object sender, EventArgs e)
@@ -37,8 +37,8 @@ namespace zpaq_GUI
             {
                 textBox1.Text = dialog.SelectedPath;
                 destloc = dialog.SelectedPath;
-                // TODO: run command list, grab contents then print into listview
                 
+
             }
         }
 
@@ -49,25 +49,41 @@ namespace zpaq_GUI
             {
                 textBox2.Text = dialog.FileName;
                 sourceloc = dialog.FileName;
+                // TODO: run command list, grab contents then print into listview
+                String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" list \"" + sourceloc + "\"";
+
+                var startInfo = new System.Diagnostics.ProcessStartInfo
+                {
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    FileName = "CMD.EXE",
+                    Arguments = "/c " + command
+                };
+
+                System.Diagnostics.Process process = new System.Diagnostics.Process { StartInfo = startInfo };
+                process.Start();
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                //
             }
         }
 
         private void extract_btn_Click(object sender, EventArgs e)
         {
-            String command = Properties.Settings.Default.zpaq_gui + " extract " + sourceloc + " -to " + destloc;
+            String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" extract \"" + sourceloc + "\" -to \"" + destloc + "\"";
 
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.FileName = "CMD.exe";
-            startInfo.Arguments = "/c " + command;
-            process.StartInfo = startInfo;
+            var startInfo = new System.Diagnostics.ProcessStartInfo {
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                FileName = "CMD.EXE",
+                Arguments = "/c " + command
+            };
+
+            System.Diagnostics.Process process = new System.Diagnostics.Process {StartInfo = startInfo};
             process.Start();
             string output = process.StandardOutput.ReadToEnd();
-            cmd_output.Text = output;
             process.WaitForExit();
         }
-    
     }
 }

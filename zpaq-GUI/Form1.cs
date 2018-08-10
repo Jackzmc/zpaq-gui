@@ -90,9 +90,8 @@ namespace zpaq_GUI
             foreach (ListViewItem file in listView1.Items)
             {
                 Files.Add(file.SubItems[0].Text);
-                //Files.ad
             }
-            String command = Properties.Settings.Default.zpaq_gui + " add " + dest_txt.Text + " " + String.Join(" ", Files.ToArray());
+            String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" add \"" + dest_txt.Text + "\" " + String.Join(" ", Files.ToArray());
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -113,10 +112,10 @@ namespace zpaq_GUI
             List<String> Files = new List<String>();
             foreach (ListViewItem file in listView1.Items)
             {
-                Files.Add(file.SubItems[0].Text);
+                Files.Add("\"" + file.SubItems[0].Text + "\"");
                 //Files.ad
             }
-            String command = Properties.Settings.Default.zpaq_gui + " add " + dest_txt.Text + " " + String.Join(" ", Files.ToArray());
+            String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" add \"" + dest_txt.Text + "\" " + String.Join(" ", Files.ToArray());
             command_in.Text = command;
         }
 
