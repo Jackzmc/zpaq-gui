@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO; //boi add this system.io
 
 namespace zpaq_GUI
 {
@@ -26,9 +27,44 @@ namespace zpaq_GUI
             if (file.ShowDialog() == DialogResult.OK)
             {
                 //TODO: check if exists
-                dest_txt.Text = file.FileName;
+                if (File.Exists(file.FileName))
+                    dest_txt.Text = file.FileName;
             }
             updateCommand();
+        }
+
+        //<summary>
+        //Returns a compressed number along with whether its in Kilobytes, Megabytes, etc.
+        //</summary>
+        float compressFileSize(long sizeInBytes, out string byteType)
+        {
+            string[] byteTypes = new string[] { " Bytes", " KB", " MB", " GB", " TB" };
+            float size = (float)sizeInBytes;
+            int compressionLevel = 0;
+            while (size / 1000 >= 1)
+            {
+                if (compressionLevel == byteTypes.Length - 1) break; //Stop at TB and dont go up to PB (unless added later)
+                compressionLevel++;
+                size /= 1000;
+            }
+            byteType = byteTypes[compressionLevel];
+            return (float)Math.Round(size, 2);
+        }
+
+        //<summary>
+        //Returns the size (in Bytes) of the folder by recursively going through every folder and adding the sizes of files.
+        //</summary>
+        long recursiveCheckFolder(string path)
+        {
+            long byteSize = 0;
+            if (Directory.EnumerateDirectories(path).Count() > 0)
+            {
+                foreach (string dir in Directory.EnumerateDirectories(path))
+                    byteSize += recursiveCheckFolder(dir);
+            }
+            foreach (string file in Directory.EnumerateFiles(path))
+                byteSize += new FileInfo(file).Length;
+            return byteSize;
         }
 
         private void files_add_Click(object sender, EventArgs e)
@@ -39,8 +75,10 @@ namespace zpaq_GUI
             {
                 foreach (String file in dialog.FileNames)
                 {
-                    string[] row = {file, "0 Bytes"};
+                    string[] row = { file, "0 Bytes" };
                     //TODO: check if exists
+                    if (File.Exists(file))
+                        row[1] = compressFileSize(new FileInfo(file).Length, out string type) + type; //i gotchu fam
                     listView1.Items.Add(new ListViewItem(row));
                 }
                     //add to listview
@@ -49,13 +87,14 @@ namespace zpaq_GUI
             }
             updateCommand();
         }
+
         private void folders_add_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             //dialog.Multiselect = true;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string[] row = {dialog.SelectedPath, null };
+                string[] row = {dialog.SelectedPath, compressFileSize(recursiveCheckFolder(dialog.SelectedPath), out string type) + type};
                 listView1.Items.Add(new ListViewItem(row));
                
                 //add to listview
@@ -73,8 +112,8 @@ namespace zpaq_GUI
                     listView1.Items.RemoveAt(item.Index);
                 }
                 updateCommand();
-            } else { 
-                //tell user no file selected?
+            } else {
+                MessageBox.Show("No file has been selected.", "ZPAQ GUI", MessageBoxButtons.OK, MessageBoxIcon.Error); //i gotchu
             }
         }
 
@@ -95,11 +134,13 @@ namespace zpaq_GUI
             String command = Properties.Settings.Default.zpaq_gui + " add " + dest_txt.Text + " " + String.Join(" ", Files.ToArray());
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.FileName = "CMD.exe";
-            startInfo.Arguments = "/c " + command;
+            var startInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                FileName = "CMD.exe",
+                Arguments = "/c" + command,
+            };
             process.StartInfo = startInfo;
             process.Start();
             string output = process.StandardOutput.ReadToEnd();

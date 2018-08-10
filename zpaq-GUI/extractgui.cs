@@ -68,6 +68,10 @@ namespace zpaq_GUI
             cmd_output.Text = output;
             process.WaitForExit();
         }
-    
+
+        private void ExtractGUI_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
