@@ -12,6 +12,7 @@ namespace zpaq_GUI
 {
     public partial class ZPAQ_Main : Form
     {
+        
         public ZPAQ_Main()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace zpaq_GUI
                 //TODO: check if exists
                 dest_txt.Text = file.FileName;
             }
+            updateCommand();
         }
 
         private void files_add_Click(object sender, EventArgs e)
@@ -45,6 +47,7 @@ namespace zpaq_GUI
                     
                 
             }
+            updateCommand();
         }
         private void folders_add_Click(object sender, EventArgs e)
         {
@@ -57,6 +60,7 @@ namespace zpaq_GUI
                
                 //add to listview
             }
+            updateCommand();
         }
 
         private void files_remove_Click(object sender, EventArgs e)
@@ -68,6 +72,7 @@ namespace zpaq_GUI
                 {
                     listView1.Items.RemoveAt(item.Index);
                 }
+                updateCommand();
             } else { 
                 //tell user no file selected?
             }
@@ -88,14 +93,6 @@ namespace zpaq_GUI
                 //Files.ad
             }
             String command = Properties.Settings.Default.zpaq_gui + " add " + dest_txt.Text + " " + String.Join(" ", Files.ToArray());
-            System.Diagnostics.Process.Start("CMD.exe", command);
-            var startinfo = new System.Diagnostics.ProcessStartInfo(@".\consoleapp.exe")
-            {
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-            };
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -111,9 +108,39 @@ namespace zpaq_GUI
 
         }
 
+        private void updateCommand()
+        {
+            List<String> Files = new List<String>();
+            foreach (ListViewItem file in listView1.Items)
+            {
+                Files.Add(file.SubItems[0].Text);
+                //Files.ad
+            }
+            String command = Properties.Settings.Default.zpaq_gui + " add " + dest_txt.Text + " " + String.Join(" ", Files.ToArray());
+            command_in.Text = command;
+        }
+
         private void ZPAQ_Main_Load(object sender, EventArgs e)
         {
+            updateCommand();
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ExtractGUI extractor = new ExtractGUI();
+            extractor.Owner = this;
+            this.Hide();
+            extractor.Show();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Jackzmc/zpaq-gui");
         }
     }
 }

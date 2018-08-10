@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ColumnHeader filesize;
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "",
-            "1",
-            "2",
-            "3"}, -1);
             this.label1 = new System.Windows.Forms.Label();
             this.dest_txt = new System.Windows.Forms.TextBox();
             this.dest_btn = new System.Windows.Forms.Button();
@@ -46,6 +41,10 @@
             this.folders_add = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.cmd_output = new System.Windows.Forms.RichTextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.command_in = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             filesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -57,11 +56,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 483);
+            this.label1.Location = new System.Drawing.Point(21, 470);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Created by Jackz. ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dest_txt
             // 
@@ -95,8 +95,6 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.filename,
             filesize});
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
             this.listView1.Location = new System.Drawing.Point(15, 56);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(648, 245);
@@ -111,7 +109,7 @@
             // 
             // settings_btn
             // 
-            this.settings_btn.Location = new System.Drawing.Point(32, 395);
+            this.settings_btn.Location = new System.Drawing.Point(32, 431);
             this.settings_btn.Name = "settings_btn";
             this.settings_btn.Size = new System.Drawing.Size(75, 23);
             this.settings_btn.TabIndex = 5;
@@ -168,11 +166,53 @@
             this.cmd_output.TabIndex = 10;
             this.cmd_output.Text = "";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(15, 395);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(113, 30);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Extract";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // command_in
+            // 
+            this.command_in.Location = new System.Drawing.Point(178, 309);
+            this.command_in.Name = "command_in";
+            this.command_in.ReadOnly = true;
+            this.command_in.Size = new System.Drawing.Size(371, 20);
+            this.command_in.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(393, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(270, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Notice: It may save the folder structure at this time, sorry";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(29, 484);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(75, 13);
+            this.linkLabel1.TabIndex = 14;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Github Source";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // ZPAQ_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(679, 506);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.command_in);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.cmd_output);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.folders_add);
@@ -206,6 +246,10 @@
         private System.Windows.Forms.Button folders_add;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox cmd_output;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox command_in;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 
