@@ -164,6 +164,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ZPAQ GUI Extractor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExtractGUI_Closing);
+            this.Load += new System.EventHandler(this.ExtractGUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
