@@ -143,7 +143,10 @@ namespace zpaq_GUI
             string output = process.StandardOutput.ReadToEnd();
             cmd_output.Text = output;
             process.WaitForExit();
-
+            if (MessageBox.Show("The process is complete. Do you want to open the folder it's in?", "ZPAQ GUI", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start(dest_txt.Text);
+            }
         }
 
 
