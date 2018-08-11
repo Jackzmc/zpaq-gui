@@ -34,5 +34,17 @@ namespace zpaq_GUI.Properties {
                 this["zpaq_gui"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool firstuse {
+            get {
+                return ((bool)(this["firstuse"]));
+            }
+            set {
+                this["firstuse"] = value;
+            }
+        }
     }
 }

@@ -152,8 +152,9 @@ namespace zpaq_GUI
 
         private void ZPAQ_Main_Load(object sender, EventArgs e)
         {
-            updateCommand();
-            version_label.Text = $"v{ProductVersion}";
+            updateCommand(); 
+            version_label.Text = $"v{ProductVersion}";  //update version
+           
         }
 
         private void button2_Click(object sender, EventArgs e) //extract gui btn
@@ -174,10 +175,31 @@ namespace zpaq_GUI
         {
             command_in.SelectAll();
         }
+        private void reportbug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/Jackzmc/zpaq-gui/issues/new");
+        }
+
+        private void ZPAQ_Main_Shown(object sender, EventArgs e) {
+            if (!Properties.Settings.Default.firstuse) {
+                intro gui = new intro();
+                gui.Show();
+                Properties.Settings.Default.firstuse = true;
+                Properties.Settings.Default.Save();
+                gui.Focus();
+            }
+        }
 
         /* functions */
         private void updateCommand()
         {
+            //check if savefile exists
+            
+            //check if files
+            
+            //check if .exe location
+
+            //on all checks make sure to make "START" button disabled.
+            
             List<String> Files = new List<String>();
             foreach (ListViewItem file in listView1.Items)
             {
@@ -189,8 +211,6 @@ namespace zpaq_GUI
             command_in.Text = command;
         }
 
-        private void reportbug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.Process.Start("https://github.com/Jackzmc/zpaq-gui/issues/new");
-        }
+      
     }
 }

@@ -240,6 +240,7 @@
             this.Name = "ZPAQ_Main";
             this.Text = "ZPAQ GUI";
             this.Load += new System.EventHandler(this.ZPAQ_Main_Load);
+            this.Shown += new System.EventHandler(this.ZPAQ_Main_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
