@@ -104,6 +104,7 @@
             this.Controls.Add(this.browe_zpaq);
             this.Controls.Add(this.zpaq_path);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "settings";

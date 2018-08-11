@@ -38,11 +38,11 @@ namespace zpaq_GUI
             string[] byteTypes = new string[] { " Bytes", " KB", " MB", " GB", " TB" };
             float size = (float)sizeInBytes;
             int compressionLevel = 0;
-            while (size / 1000 >= 1)
+            while (size / 1024 >= 1)
             {
                 if (compressionLevel == byteTypes.Length - 1) break; //Stop at TB and dont go up to PB (unless added later)
                 compressionLevel++;
-                size /= 1000;
+                size /= 1024;
             }
             byteType = byteTypes[compressionLevel];
             return (float)Math.Round(size, 2);
@@ -54,11 +54,8 @@ namespace zpaq_GUI
         long recursiveCheckFolder(string path)
         {
             long byteSize = 0;
-            if (Directory.EnumerateDirectories(path).Count() > 0)
-            {
-                foreach (string dir in Directory.EnumerateDirectories(path))
-                    byteSize += recursiveCheckFolder(dir);
-            }
+            foreach (string dir in Directory.EnumerateDirectories(path))
+                byteSize += recursiveCheckFolder(dir);
             foreach (string file in Directory.EnumerateFiles(path))
                 byteSize += new FileInfo(file).Length;
             return byteSize;
@@ -85,15 +82,22 @@ namespace zpaq_GUI
             updateCommand();
         }
 
-        private void folders_add_Click(object sender, EventArgs e)
+        private async void folders_add_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             //dialog.Multiselect = true;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string[] row = {dialog.SelectedPath, compressFileSize(recursiveCheckFolder(dialog.SelectedPath), out string type) + type};
+                string[] row = { dialog.SelectedPath, "Calculating..."};
                 listView1.Items.Add(new ListViewItem(row));
-               
+                //Using Task.Run() so you can still use other aspects of the program while it is calculating size.
+                string folderSize = await Task.Run(() => compressFileSize(recursiveCheckFolder(dialog.SelectedPath), out string type) + type);
+                cmd_output.Text += Environment.NewLine + "Complete.";
+                foreach(ListViewItem item in listView1.Items)
+                {
+                    if (item.SubItems[0].Text == dialog.SelectedPath)
+                        item.SubItems[1].Text = folderSize;
+                }
                 //add to listview
             }
             updateCommand();

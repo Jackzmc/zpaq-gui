@@ -237,6 +237,7 @@
             this.Controls.Add(this.dest_btn);
             this.Controls.Add(this.dest_txt);
             this.Controls.Add(this.version_label);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ZPAQ_Main";
             this.Text = "ZPAQ GUI";
             this.Load += new System.EventHandler(this.ZPAQ_Main_Load);
