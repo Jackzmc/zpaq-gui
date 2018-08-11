@@ -26,9 +26,6 @@ namespace zpaq_GUI
             file.Filter = "Zpaq (*.zpaq)|*.zpaq";
             if (file.ShowDialog() == DialogResult.OK)
             {
-                //TODO: check if exists
-                if (File.Exists(file.FileName))
-                    dest_txt.Text = file.FileName;
             }
             updateCommand();
         }
@@ -123,8 +120,9 @@ namespace zpaq_GUI
             settings.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) //on start btn
         {
+            //TODO: check if dest folder exists
             List<String> Files = new List<String>();
             foreach (ListViewItem file in listView1.Items)
             {
@@ -148,6 +146,33 @@ namespace zpaq_GUI
 
         }
 
+
+        private void ZPAQ_Main_Load(object sender, EventArgs e)
+        {
+            updateCommand();
+            version_label.Text = $"v{ProductVersion}";
+        }
+
+        private void button2_Click(object sender, EventArgs e) //extract gui btn
+        {
+            ExtractGUI extractor = new ExtractGUI();
+            extractor.Owner = this;
+            this.Hide();
+            extractor.Show();
+        }
+
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Jackzmc/zpaq-gui");
+        }
+
+        private void command_Clicked(object sender, EventArgs e)
+        {
+            command_in.SelectAll();
+        }
+
+        /* functions */
         private void updateCommand()
         {
             List<String> Files = new List<String>();
@@ -156,31 +181,13 @@ namespace zpaq_GUI
                 Files.Add("\"" + file.SubItems[0].Text + "\"");
                 //Files.ad
             }
-            String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" add \"" + dest_txt.Text + "\" " + String.Join(" ", Files.ToArray());
+            String dest_path = (dest_txt.Text == "") ? "" : dest_txt.Text;
+            String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" add " + dest_path + " " + String.Join(" ", Files.ToArray());
             command_in.Text = command;
         }
 
-        private void ZPAQ_Main_Load(object sender, EventArgs e)
-        {
-            updateCommand();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ExtractGUI extractor = new ExtractGUI();
-            extractor.Owner = this;
-            this.Hide();
-            extractor.Show();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/Jackzmc/zpaq-gui");
+        private void reportbug_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/Jackzmc/zpaq-gui/issues/new");
         }
     }
 }

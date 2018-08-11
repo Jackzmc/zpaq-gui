@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ColumnHeader filesize;
-            this.version = new System.Windows.Forms.Label();
+            this.version_label = new System.Windows.Forms.Label();
             this.dest_txt = new System.Windows.Forms.TextBox();
             this.dest_btn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,6 +45,7 @@
             this.command_in = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.reportbug = new System.Windows.Forms.LinkLabel();
             filesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -53,15 +54,14 @@
             filesize.Text = "Size";
             filesize.Width = 94;
             // 
-            // version
+            // version_label
             // 
-            this.version.AutoSize = true;
-            this.version.Location = new System.Drawing.Point(37, 471);
-            this.version.Name = "version";
-            this.version.Size = new System.Drawing.Size(53, 13);
-            this.version.TabIndex = 0;
-            this.version.Text = "[version?]";
-            this.version.Click += new System.EventHandler(this.label1_Click);
+            this.version_label.AutoSize = true;
+            this.version_label.Location = new System.Drawing.Point(0, 484);
+            this.version_label.Name = "version_label";
+            this.version_label.Size = new System.Drawing.Size(47, 13);
+            this.version_label.TabIndex = 0;
+            this.version_label.Text = "V0.0.0.0";
             // 
             // dest_txt
             // 
@@ -183,6 +183,7 @@
             this.command_in.ReadOnly = true;
             this.command_in.Size = new System.Drawing.Size(371, 20);
             this.command_in.TabIndex = 12;
+            this.command_in.Click += new System.EventHandler(this.command_Clicked);
             // 
             // label3
             // 
@@ -196,7 +197,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(29, 484);
+            this.linkLabel1.Location = new System.Drawing.Point(53, 483);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(75, 13);
             this.linkLabel1.TabIndex = 14;
@@ -204,11 +205,23 @@
             this.linkLabel1.Text = "Github Source";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // reportbug
+            // 
+            this.reportbug.AutoSize = true;
+            this.reportbug.Location = new System.Drawing.Point(67, 470);
+            this.reportbug.Name = "reportbug";
+            this.reportbug.Size = new System.Drawing.Size(61, 13);
+            this.reportbug.TabIndex = 15;
+            this.reportbug.TabStop = true;
+            this.reportbug.Text = "Report Bug";
+            this.reportbug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.reportbug_LinkClicked);
+            // 
             // ZPAQ_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(679, 506);
+            this.Controls.Add(this.reportbug);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.command_in);
@@ -223,7 +236,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dest_btn);
             this.Controls.Add(this.dest_txt);
-            this.Controls.Add(this.version);
+            this.Controls.Add(this.version_label);
             this.Name = "ZPAQ_Main";
             this.Text = "ZPAQ GUI";
             this.Load += new System.EventHandler(this.ZPAQ_Main_Load);
@@ -234,7 +247,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label version;
+        private System.Windows.Forms.Label version_label;
         private System.Windows.Forms.TextBox dest_txt;
         private System.Windows.Forms.Button dest_btn;
         private System.Windows.Forms.Label label2;
@@ -250,6 +263,7 @@
         private System.Windows.Forms.TextBox command_in;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel reportbug;
     }
 }
 
