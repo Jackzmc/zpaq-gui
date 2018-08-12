@@ -69,11 +69,14 @@
             // saveloc_btn
             // 
             this.saveloc_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveloc_btn.Image = global::zpaq_GUI.Properties.Resources.browse;
             this.saveloc_btn.Location = new System.Drawing.Point(566, 26);
             this.saveloc_btn.Name = "saveloc_btn";
             this.saveloc_btn.Size = new System.Drawing.Size(75, 21);
             this.saveloc_btn.TabIndex = 2;
             this.saveloc_btn.Text = "Browse";
+            this.saveloc_btn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.saveloc_btn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.saveloc_btn.UseVisualStyleBackColor = true;
             this.saveloc_btn.Click += new System.EventHandler(this.saveloc_btn_Click);
             // 
