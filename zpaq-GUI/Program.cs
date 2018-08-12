@@ -12,10 +12,15 @@ namespace zpaq_GUI
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string [] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if(args.Length > 0) {
+                Application.Run(new ExtractGUI(args[0]));
+                return;
+            }
+            
             Application.Run(new ZPAQ_Main());
         }
     }

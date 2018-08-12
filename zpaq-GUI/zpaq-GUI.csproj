@@ -70,10 +70,10 @@
     <ManifestKeyFile>zpaq-GUI_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -89,12 +89,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssociationManager.cs" />
     <Compile Include="extractgui.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="extractgui.Designer.cs">
       <DependentUpon>extractgui.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileAssociationInfo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,13 +110,19 @@
       <DependentUpon>intro.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramAssociationInfo.cs" />
+    <Compile Include="ProgramIcon.cs" />
+    <Compile Include="ProgramVerb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistryException.cs" />
+    <Compile Include="RegistryWrapper.cs" />
     <Compile Include="settings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="settings.Designer.cs">
       <DependentUpon>settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShellNotification.cs" />
     <EmbeddedResource Include="extractgui.resx">
       <DependentUpon>extractgui.cs</DependentUpon>
     </EmbeddedResource>

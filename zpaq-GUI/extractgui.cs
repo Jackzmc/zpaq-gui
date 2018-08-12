@@ -16,9 +16,52 @@ namespace zpaq_GUI
     {
         private String sourceloc;
         private String destloc;
-        public ExtractGUI()
+
+        public ExtractGUI(String args)
         {
             InitializeComponent();
+            if(args != "") {
+                String openedWithFile = args;
+                if (openedWithFile.EndsWith(".zpaq")) {
+                    //this.Show();
+                    //this.initalizeWithFile(openedWithFile);
+                    source_btn.Enabled = false;
+                    textBox2.ReadOnly = true;
+                    textBox2.Text = openedWithFile;
+                    sourceloc = openedWithFile;
+
+                    // TODO: run command list, grab contents then print into listview
+                    String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" list \"" + sourceloc + "\"";
+                    System.Diagnostics.Debug.WriteLine(command);
+                    var startInfo = new System.Diagnostics.ProcessStartInfo {
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        FileName = "CMD.EXE",
+                        Arguments = "/c " + command
+                    };
+
+                    System.Diagnostics.Process process = new System.Diagnostics.Process { StartInfo = startInfo };
+                    process.Start();
+                    string output = process.StandardOutput.ReadToEnd();
+                    process.WaitForExit();
+
+                    //Use REGEX to get the data we want
+                    foreach (Match fileInfo in Regex.Matches(output, @"/^.*(- ).*$/gm")) {
+                        //Parse our date information
+                        DateTime dateModified = DateTime.Parse(Regex.Matches(fileInfo.ToString(), $"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]/gm")[0].ToString());
+                        //Grab and compress our file size;
+                        string fileSize = compressFileSize(long.Parse(Regex.Matches(fileInfo.ToString(), $"/.............(?= A)/g")[0].ToString()), out string byteType) + byteType;
+                        //Get the file name.
+                        string fileName = Regex.Matches(fileInfo.ToString(), $"/(?=A).*$/g")[0].ToString().Substring(1).Split(' ').ToString();
+
+                        if (!doesItemExist(fileName)) {
+                            string[] listViewInfo = { fileName, dateModified.ToString(), fileSize };
+                            filelist.Items.Add(new ListViewItem(listViewInfo));
+                        }
+                    }
+                }
+            }
+            
         }
 
         private void ExtractGUI_Closing(object sender, FormClosingEventArgs e)
@@ -135,6 +178,9 @@ namespace zpaq_GUI
                 }
             }
             return false;
+        }
+        private void ExtractGUI_Load(object sender, EventArgs e) {
+
         }
     }
 }

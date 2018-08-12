@@ -13,10 +13,11 @@ namespace zpaq_GUI
 {
     public partial class ZPAQ_Main : Form
     {
-        
+
         public ZPAQ_Main()
         {
             InitializeComponent();
+            
         }
 
         private void dest_btn_Click(object sender, EventArgs e)
@@ -202,10 +203,16 @@ namespace zpaq_GUI
 
         private void button2_Click(object sender, EventArgs e) //extract gui btn
         {
-            ExtractGUI extractor = new ExtractGUI();
-            extractor.Owner = this;
-            this.Hide();
-            extractor.Show();
+            //ExtractGUI extractor = new ExtractGUI();
+            
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Zpaq (*.zpaq)|*.zpaq";
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                ExtractGUI extractor = new ExtractGUI(dialog.FileName);
+                extractor.Owner = this;
+                this.Hide();
+                extractor.Show();
+            }
         }
 
 
@@ -231,7 +238,9 @@ namespace zpaq_GUI
                 gui.Focus();
             }
         }
-
+        private void button1_Click_1(object sender, EventArgs e) {
+            //this button could show when it is complete
+        }
         /* functions */
         private void updateCommand()
         {
@@ -254,8 +263,6 @@ namespace zpaq_GUI
             command_in.Text = command;
         }
 
-        private void button1_Click_1(object sender, EventArgs e) {
-            //this button could show when it is complete
-        }
+        
     }
 }

@@ -39,9 +39,9 @@
             this.extract_btn = new System.Windows.Forms.Button();
             this.filelist = new System.Windows.Forms.ListView();
             this.filename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.filedate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.cmd_output = new System.Windows.Forms.RichTextBox();
-            this.filedate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             filesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -134,6 +134,11 @@
             this.filename.Text = "File Name";
             this.filename.Width = 380;
             // 
+            // filedate
+            // 
+            this.filedate.Text = "Date Modified";
+            this.filedate.Width = 150;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -150,11 +155,6 @@
             this.cmd_output.Size = new System.Drawing.Size(544, 59);
             this.cmd_output.TabIndex = 10;
             this.cmd_output.Text = "";
-            // 
-            // filedate
-            // 
-            this.filedate.Text = "Date Modified";
-            this.filedate.Width = 150;
             // 
             // ExtractGUI
             // 
@@ -178,6 +178,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ZPAQ GUI Extractor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExtractGUI_Closing);
+            this.Load += new System.EventHandler(this.ExtractGUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

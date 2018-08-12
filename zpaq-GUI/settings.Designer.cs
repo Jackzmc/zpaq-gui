@@ -99,7 +99,6 @@
             // check_fileassoc
             // 
             this.check_fileassoc.AutoSize = true;
-            this.check_fileassoc.Enabled = false;
             this.check_fileassoc.Location = new System.Drawing.Point(16, 56);
             this.check_fileassoc.Name = "check_fileassoc";
             this.check_fileassoc.Size = new System.Drawing.Size(162, 17);

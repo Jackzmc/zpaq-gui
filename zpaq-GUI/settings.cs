@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrendanGrant.Helpers.FileAssociation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -63,7 +64,32 @@ namespace zpaq_GUI
         private void check_fileassoc_CheckedChanged(object sender, EventArgs e) {
             if(check_fileassoc.Checked) {
                 //run with admin - set file assoc
-                
+                FileAssociationInfo fai = new FileAssociationInfo(".zpaq");
+                if (!fai.Exists) {
+                    fai.Create("zpaq_gui");
+                    //fai.ContentType = "application/zpaq"; //MIME type (is optional)
+                    fai.OpenWithList = new string[]{ "zpaq-gui.exe" };
+                }
+                ProgramAssociationInfo pai = new ProgramAssociationInfo(fai.ProgID);
+                if (!pai.Exists) {
+                    pai.Create
+                    (
+                    //Description of program/file type
+                    ".zpaq compression",
+
+                    new ProgramVerb
+                         (
+                         //Verb name
+                         "Open",
+                         //Path and arguments to use
+
+                         System.Reflection.Assembly.GetEntryAssembly().Location
+                         )
+                       );
+
+                    //optional
+                    pai.DefaultIcon = new ProgramIcon(@"C:\SomePath\SomeIcon.ico");
+                }
             }
         }
 
