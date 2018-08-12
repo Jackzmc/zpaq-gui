@@ -76,11 +76,13 @@
             // 
             // dest_btn
             // 
+            this.dest_btn.Image = global::zpaq_GUI.Properties.Resources.browse;
             this.dest_btn.Location = new System.Drawing.Point(535, 25);
             this.dest_btn.Name = "dest_btn";
             this.dest_btn.Size = new System.Drawing.Size(75, 30);
             this.dest_btn.TabIndex = 2;
             this.dest_btn.Text = "Browse";
+            this.dest_btn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.dest_btn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.dest_btn.UseVisualStyleBackColor = true;
             this.dest_btn.Click += new System.EventHandler(this.dest_btn_Click);
@@ -121,6 +123,7 @@
             // 
             // settings_btn
             // 
+            this.settings_btn.Image = global::zpaq_GUI.Properties.Resources.cogwheel;
             this.settings_btn.Location = new System.Drawing.Point(732, 24);
             this.settings_btn.Name = "settings_btn";
             this.settings_btn.Size = new System.Drawing.Size(32, 32);
@@ -132,11 +135,13 @@
             // files_add
             // 
             this.files_add.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.files_add.Image = global::zpaq_GUI.Properties.Resources.addfile;
             this.files_add.Location = new System.Drawing.Point(19, 308);
             this.files_add.Name = "files_add";
             this.files_add.Size = new System.Drawing.Size(141, 34);
             this.files_add.TabIndex = 6;
             this.files_add.Text = "Add Files";
+            this.files_add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.files_add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.files_add.UseVisualStyleBackColor = true;
             this.files_add.Click += new System.EventHandler(this.files_add_Click);
@@ -155,11 +160,13 @@
             // 
             this.folders_add.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.folders_add.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.folders_add.Image = global::zpaq_GUI.Properties.Resources.addfolder;
             this.folders_add.Location = new System.Drawing.Point(166, 308);
             this.folders_add.Name = "folders_add";
             this.folders_add.Size = new System.Drawing.Size(128, 34);
             this.folders_add.TabIndex = 8;
             this.folders_add.Text = "Add Folders";
+            this.folders_add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.folders_add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.folders_add.UseVisualStyleBackColor = true;
             this.folders_add.Click += new System.EventHandler(this.folders_add_Click);
@@ -174,6 +181,7 @@
             this.start_btn.Size = new System.Drawing.Size(113, 44);
             this.start_btn.TabIndex = 9;
             this.start_btn.Text = "Start";
+            this.start_btn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.start_btn.UseVisualStyleBackColor = false;
             this.start_btn.Click += new System.EventHandler(this.button1_Click);
             // 

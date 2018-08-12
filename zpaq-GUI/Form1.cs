@@ -87,7 +87,7 @@ namespace zpaq_GUI
                 {
                     if (!doesItemExist(file))
                     {
-                        string[] row = { file, "Calculating..." };
+                        string[] row = { file, new FileInfo(file).LastWriteTime.ToString(), "Calculating..." };
                         listView1.Items.Add(new ListViewItem(row));
                         //Using Task.Run() so you can still use other aspects of the program while it is calculating size.
                         string fileSize = await Task.Run(() => compressFileSize(new FileInfo(file).Length, out string type) + type);
@@ -114,7 +114,7 @@ namespace zpaq_GUI
             {
                 if (!doesItemExist(dialog.SelectedPath))
                 {
-                    string[] row = { dialog.SelectedPath, "Calculating..." };
+                    string[] row = { dialog.SelectedPath, new DirectoryInfo(dialog.SelectedPath).LastWriteTime.ToString(), "Calculating..." };
                     listView1.Items.Add(new ListViewItem(row));
                     //Using Task.Run() so you can still use other aspects of the program while it is calculating size.
                     string folderSize = await Task.Run(() => compressFileSize(recursiveCheckFolder(dialog.SelectedPath), out string type) + type);

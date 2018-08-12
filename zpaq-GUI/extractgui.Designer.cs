@@ -39,9 +39,9 @@
             this.extract_btn = new System.Windows.Forms.Button();
             this.filelist = new System.Windows.Forms.ListView();
             this.filename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.filedate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.cmd_output = new System.Windows.Forms.RichTextBox();
-            this.filedate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             filesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -69,11 +69,14 @@
             // saveloc_btn
             // 
             this.saveloc_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveloc_btn.Image = global::zpaq_GUI.Properties.Resources.browse;
             this.saveloc_btn.Location = new System.Drawing.Point(566, 26);
             this.saveloc_btn.Name = "saveloc_btn";
             this.saveloc_btn.Size = new System.Drawing.Size(75, 21);
             this.saveloc_btn.TabIndex = 2;
             this.saveloc_btn.Text = "Browse";
+            this.saveloc_btn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.saveloc_btn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.saveloc_btn.UseVisualStyleBackColor = true;
             this.saveloc_btn.Click += new System.EventHandler(this.saveloc_btn_Click);
             // 
@@ -134,6 +137,11 @@
             this.filename.Text = "File Name";
             this.filename.Width = 380;
             // 
+            // filedate
+            // 
+            this.filedate.Text = "Date Modified";
+            this.filedate.Width = 150;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -150,11 +158,6 @@
             this.cmd_output.Size = new System.Drawing.Size(544, 59);
             this.cmd_output.TabIndex = 10;
             this.cmd_output.Text = "";
-            // 
-            // filedate
-            // 
-            this.filedate.Text = "Date Modified";
-            this.filedate.Width = 150;
             // 
             // ExtractGUI
             // 
