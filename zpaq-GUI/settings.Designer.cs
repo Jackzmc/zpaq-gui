@@ -34,6 +34,9 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.check_fileassoc = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -66,7 +69,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(13, 80);
+            this.linkLabel1.Location = new System.Drawing.Point(13, 90);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(81, 13);
             this.linkLabel1.TabIndex = 3;
@@ -77,7 +80,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(124, 80);
+            this.label2.Location = new System.Drawing.Point(123, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(209, 13);
             this.label2.TabIndex = 4;
@@ -85,7 +88,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(484, 70);
+            this.button1.Location = new System.Drawing.Point(484, 80);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -93,11 +96,48 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // check_fileassoc
+            // 
+            this.check_fileassoc.AutoSize = true;
+            this.check_fileassoc.Enabled = false;
+            this.check_fileassoc.Location = new System.Drawing.Point(16, 56);
+            this.check_fileassoc.Name = "check_fileassoc";
+            this.check_fileassoc.Size = new System.Drawing.Size(162, 17);
+            this.check_fileassoc.TabIndex = 6;
+            this.check_fileassoc.Text = "Associate .zpaq with this exe";
+            this.check_fileassoc.UseVisualStyleBackColor = true;
+            this.check_fileassoc.CheckedChanged += new System.EventHandler(this.check_fileassoc_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(17, 137);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(493, 11);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Credit to the authors: Sarfraz Shoukat, Dave Gandy, Picol, Elegant Themes, and Fr" +
+    "eepik on flaticon.com for the icons";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(16, 124);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(163, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Developed by Jackz and Caeden";
+            // 
             // settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(571, 100);
+            this.ClientSize = new System.Drawing.Size(567, 157);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.check_fileassoc);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.linkLabel1);
@@ -126,5 +166,8 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox check_fileassoc;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

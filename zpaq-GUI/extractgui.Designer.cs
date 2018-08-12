@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ColumnHeader filesize;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExtractGUI));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.saveloc_btn = new System.Windows.Forms.Button();
@@ -66,9 +67,10 @@
             // 
             // saveloc_btn
             // 
-            this.saveloc_btn.Location = new System.Drawing.Point(566, 24);
+            this.saveloc_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveloc_btn.Location = new System.Drawing.Point(566, 26);
             this.saveloc_btn.Name = "saveloc_btn";
-            this.saveloc_btn.Size = new System.Drawing.Size(75, 23);
+            this.saveloc_btn.Size = new System.Drawing.Size(75, 21);
             this.saveloc_btn.TabIndex = 2;
             this.saveloc_btn.Text = "Browse";
             this.saveloc_btn.UseVisualStyleBackColor = true;
@@ -85,6 +87,7 @@
             // 
             // source_btn
             // 
+            this.source_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.source_btn.Location = new System.Drawing.Point(566, 73);
             this.source_btn.Name = "source_btn";
             this.source_btn.Size = new System.Drawing.Size(75, 23);
@@ -102,7 +105,8 @@
             // 
             // extract_btn
             // 
-            this.extract_btn.Location = new System.Drawing.Point(15, 105);
+            this.extract_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.extract_btn.Location = new System.Drawing.Point(16, 105);
             this.extract_btn.Name = "extract_btn";
             this.extract_btn.Size = new System.Drawing.Size(75, 37);
             this.extract_btn.TabIndex = 6;
@@ -149,6 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(653, 358);
             this.Controls.Add(this.cmd_output);
             this.Controls.Add(this.label3);
@@ -161,6 +166,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExtractGUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ZPAQ GUI Extractor";

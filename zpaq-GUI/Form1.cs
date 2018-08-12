@@ -124,7 +124,7 @@ namespace zpaq_GUI
             settings.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e) //on start btn
+        private void button1_Click(object sender, EventArgs e) //on start btn, //TODO: rename
         {
             //TODO: check if dest folder exists
             List<String> Files = new List<String>();
@@ -158,7 +158,13 @@ namespace zpaq_GUI
         {
             updateCommand(); 
             version_label.Text = $"v{ProductVersion}";  //update version
-           
+
+            //update images
+            folders_add.Image = (Image)(new Bitmap(Properties.Resources.addfolder, new Size(16, 16)));
+            files_add.Image = (Image)(new Bitmap(Properties.Resources.addfile, new Size(16, 16)));
+            dest_btn.Image = (Image)(new Bitmap(Properties.Resources.browse, new Size(16, 16)));
+            settings_btn.Image = (Image)(new Bitmap(Properties.Resources.cogwheel, new Size(16, 16)));
+            
         }
 
         private void button2_Click(object sender, EventArgs e) //extract gui btn
@@ -215,6 +221,8 @@ namespace zpaq_GUI
             command_in.Text = command;
         }
 
-      
+        private void button1_Click_1(object sender, EventArgs e) {
+            //this button could show when it is complete
+        }
     }
 }
