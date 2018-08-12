@@ -26,6 +26,7 @@ namespace zpaq_GUI
             file.Filter = "Zpaq (*.zpaq)|*.zpaq";
             if (file.ShowDialog() == DialogResult.OK)
             {
+                dest_txt.Text = file.FileName;
             }
             updateCommand();
         }
@@ -61,7 +62,22 @@ namespace zpaq_GUI
             return byteSize;
         }
 
-        private void files_add_Click(object sender, EventArgs e)
+        bool doesItemExist (string item)
+        {
+            foreach(ListViewItem viewItem in listView1.Items)
+            {
+                foreach(ListViewItem.ListViewSubItem items in viewItem.SubItems)
+                {
+                    if (items.Text == item)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private async void files_add_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog= new OpenFileDialog();
             dialog.Multiselect = true;
@@ -69,15 +85,23 @@ namespace zpaq_GUI
             {
                 foreach (String file in dialog.FileNames)
                 {
-                    string[] row = { file, "0 Bytes" };
-                    //TODO: check if exists
-                    if (File.Exists(file))
-                        row[1] = compressFileSize(new FileInfo(file).Length, out string type) + type; //i gotchu fam
-                    listView1.Items.Add(new ListViewItem(row));
+                    if (!doesItemExist(file))
+                    {
+                        string[] row = { file, "Calculating..." };
+                        listView1.Items.Add(new ListViewItem(row));
+                        //Using Task.Run() so you can still use other aspects of the program while it is calculating size.
+                        string fileSize = await Task.Run(() => compressFileSize(new FileInfo(file).Length, out string type) + type);
+                        foreach (ListViewItem item in listView1.Items)
+                        {
+                            if (item.SubItems[0].Text == file)
+                                item.SubItems[1].Text = fileSize;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("A file you selected is already in the list.", "ZPAQ GUI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                    //add to listview
-                    
-                
             }
             updateCommand();
         }
@@ -88,17 +112,22 @@ namespace zpaq_GUI
             //dialog.Multiselect = true;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string[] row = { dialog.SelectedPath, "Calculating..."};
-                listView1.Items.Add(new ListViewItem(row));
-                //Using Task.Run() so you can still use other aspects of the program while it is calculating size.
-                string folderSize = await Task.Run(() => compressFileSize(recursiveCheckFolder(dialog.SelectedPath), out string type) + type);
-                cmd_output.Text += Environment.NewLine + "Complete.";
-                foreach(ListViewItem item in listView1.Items)
+                if (!doesItemExist(dialog.SelectedPath))
                 {
-                    if (item.SubItems[0].Text == dialog.SelectedPath)
-                        item.SubItems[1].Text = folderSize;
+                    string[] row = { dialog.SelectedPath, "Calculating..." };
+                    listView1.Items.Add(new ListViewItem(row));
+                    //Using Task.Run() so you can still use other aspects of the program while it is calculating size.
+                    string folderSize = await Task.Run(() => compressFileSize(recursiveCheckFolder(dialog.SelectedPath), out string type) + type);
+                    foreach (ListViewItem item in listView1.Items)
+                    {
+                        if (item.SubItems[0].Text == dialog.SelectedPath)
+                            item.SubItems[1].Text = folderSize;
+                    }
                 }
-                //add to listview
+                else
+                {
+                    MessageBox.Show("The folder you selected is already in the list.", "ZPAQ GUI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             updateCommand();
         }
@@ -139,7 +168,7 @@ namespace zpaq_GUI
             {
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
-                FileName = "CMD.exe",
+                FileName = "cmd.exe",
                 Arguments = "/c" + command,
             };
             process.StartInfo = startInfo;
@@ -147,9 +176,13 @@ namespace zpaq_GUI
             string output = process.StandardOutput.ReadToEnd();
             cmd_output.Text = output;
             process.WaitForExit();
-            if (MessageBox.Show("The process is complete. Do you want to open the folder it's in?", "ZPAQ GUI", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            if (File.Exists(dest_txt.Text))
             {
-                System.Diagnostics.Process.Start(dest_txt.Text);
+                MessageBox.Show("The process is complete.\nFinal File Size: " + compressFileSize(new FileInfo(dest_txt.Text).Length, out string type) + type, "ZPAQ GUI", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("The ZPAQ file could not be created.", "ZPAQ GUI", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

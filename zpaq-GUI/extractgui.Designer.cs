@@ -40,6 +40,7 @@
             this.filename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.cmd_output = new System.Windows.Forms.RichTextBox();
+            this.filedate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             filesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -115,6 +116,7 @@
             this.filelist.AllowDrop = true;
             this.filelist.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.filename,
+            this.filedate,
             filesize});
             this.filelist.Location = new System.Drawing.Point(12, 170);
             this.filelist.Name = "filelist";
@@ -126,7 +128,7 @@
             // filename
             // 
             this.filename.Text = "File Name";
-            this.filename.Width = 530;
+            this.filename.Width = 380;
             // 
             // label3
             // 
@@ -144,6 +146,11 @@
             this.cmd_output.Size = new System.Drawing.Size(544, 59);
             this.cmd_output.TabIndex = 10;
             this.cmd_output.Text = "";
+            // 
+            // filedate
+            // 
+            this.filedate.Text = "Date Modified";
+            this.filedate.Width = 150;
             // 
             // ExtractGUI
             // 
@@ -183,5 +190,6 @@
         private System.Windows.Forms.ColumnHeader filename;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox cmd_output;
+        private System.Windows.Forms.ColumnHeader filedate;
     }
 }
