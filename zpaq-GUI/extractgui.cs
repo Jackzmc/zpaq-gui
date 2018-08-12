@@ -36,14 +36,13 @@ namespace zpaq_GUI
                     var startInfo = new System.Diagnostics.ProcessStartInfo {
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
-                        FileName = "CMD.EXE",
+                        FileName = "cmd.exe",
                         Arguments = "/c " + command
                     };
 
                     System.Diagnostics.Process process = new System.Diagnostics.Process { StartInfo = startInfo };
                     process.Start();
                     string output = process.StandardOutput.ReadToEnd();
-                    process.WaitForExit();
 
                     //Use REGEX to get the data we want
                     foreach (Match fileInfo in Regex.Matches(output, @"/^.*(- ).*$/gm")) {
@@ -59,6 +58,7 @@ namespace zpaq_GUI
                             filelist.Items.Add(new ListViewItem(listViewInfo));
                         }
                     }
+                    process.WaitForExit();
                 }
             }
             
