@@ -121,7 +121,7 @@ namespace zpaq_GUI
                     foreach (ListViewItem item in listView1.Items)
                     {
                         if (item.SubItems[0].Text == dialog.SelectedPath)
-                            item.SubItems[1].Text = folderSize;
+                            item.SubItems[2].Text = folderSize;
                     }
                 }
                 else
