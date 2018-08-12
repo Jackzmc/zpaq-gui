@@ -59,5 +59,16 @@ namespace zpaq_GUI
         {
             zpaq_path.Text = Properties.Settings.Default.zpaq_gui;
         }
+
+        private void check_fileassoc_CheckedChanged(object sender, EventArgs e) {
+            if(check_fileassoc.Checked) {
+                //run with admin - set file assoc
+                
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e) {
+
+        }
     }
 }

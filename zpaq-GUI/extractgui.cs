@@ -47,13 +47,14 @@ namespace zpaq_GUI
         private void source_btn_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Zpaq (*.zpaq)|*.zpaq";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 textBox2.Text = dialog.FileName;
                 sourceloc = dialog.FileName;
                 // TODO: run command list, grab contents then print into listview
                 String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" list \"" + sourceloc + "\"";
-
+                System.Diagnostics.Debug.WriteLine(command);
                 var startInfo = new System.Diagnostics.ProcessStartInfo
                 {
                     UseShellExecute = false,
@@ -83,11 +84,13 @@ namespace zpaq_GUI
                         filelist.Items.Add(new ListViewItem(listViewInfo));
                     }
                 }
+
             }
         }
 
         private void extract_btn_Click(object sender, EventArgs e)
         {
+            //TODO: checks for: sourceloc & destloc
             String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" extract \"" + sourceloc + "\" -to \"" + destloc + "\"";
 
             var startInfo = new System.Diagnostics.ProcessStartInfo {

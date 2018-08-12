@@ -7,14 +7,14 @@
     <ProjectGuid>{DE153A24-C06B-45D2-BDA7-235C211360BF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>zpaq_GUI</RootNamespace>
-    <AssemblyName>zpaq-GUI</AssemblyName>
+    <AssemblyName>zpaq_GUI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>D:\_vspublish\zpaq_gui\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
+    <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -22,13 +22,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://github.com/Jackzmc/zpaq-gui/</InstallUrl>
     <ProductName>zpaq-GUI</ProductName>
     <PublisherName>Jackz</PublisherName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>8</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -48,9 +47,12 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -62,13 +64,16 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>33AEAFA07EB70F110AA63E668632ED1CE532BE53</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>503BFF49026D56B395B0EDE4883A70D092137C3B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>zpaq-GUI_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -143,6 +148,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="README.md" />
+    <None Include="zpaq-GUI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -160,6 +166,24 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zpaq.ico" />
+    <None Include="Resources\004-settings-cogwheel.png" />
+    <None Include="Resources\003-search-in-folder.png" />
+    <None Include="Resources\005-save-disk.png" />
+    <None Include="Resources\002-addfolder.png" />
+    <None Include="Resources\001-addfile.png" />
+    <None Include="Resources\cog-wheel-silhouette.png" />
+    <Content Include="zpaq.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".zpaq">
+      <Visible>False</Visible>
+      <Description>zpaq compression</Description>
+      <Progid>zpaq.gui.1</Progid>
+      <DefaultIcon>zpaq.ico</DefaultIcon>
+    </FileAssociation>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
