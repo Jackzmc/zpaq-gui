@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace zpaq_GUI
 {
@@ -66,10 +68,23 @@ namespace zpaq_GUI
                 string output = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
 
-                String[] outputArray = output.Split('\n');
-                String thing = String.Join("\n", outputArray.Take(4));
-                System.Diagnostics.Debug.WriteLine(thing); //should skip to 4th \n
-                //
+                //Use REGEX to get the data we want
+                foreach(Match fileInfo in Regex.Matches(output, @"/^.*(- ).*$/gm"))
+                {
+                    //Parse our date information
+                    DateTime dateModified = DateTime.Parse(Regex.Matches(fileInfo.ToString(), $"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]/gm")[0].ToString());
+                    //Grab and compress our file size;
+                    string fileSize = compressFileSize(long.Parse(Regex.Matches(fileInfo.ToString(), $"/.............(?= A)/g")[0].ToString()), out string byteType) + byteType;
+                    //Get the file name.
+                    string fileName = Regex.Matches(fileInfo.ToString(), $"/(?=A).*$/g")[0].ToString().Substring(1).Split(' ').ToString();
+
+                    if (!doesItemExist(fileName))
+                    {
+                        string[] listViewInfo = { fileName, dateModified.ToString(), fileSize };
+                        filelist.Items.Add(new ListViewItem(listViewInfo));
+                    }
+                }
+
             }
         }
 
@@ -89,6 +104,37 @@ namespace zpaq_GUI
             process.Start();
             string output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
+        }
+
+        float compressFileSize(long sizeInBytes, out string byteType)
+        {
+            string[] byteTypes = new string[] { " Bytes", " KB", " MB", " GB", " TB" };
+            float size = (float)sizeInBytes;
+            int compressionLevel = 0;
+            while (size / 1024 >= 1)
+            {
+                if (compressionLevel == byteTypes.Length - 1) break; //Stop at TB and dont go up to PB (unless added later)
+                compressionLevel++;
+                size /= 1024;
+            }
+            byteType = byteTypes[compressionLevel];
+            return (float)Math.Round(size, 2);
+        }
+
+
+        bool doesItemExist(string item)
+        {
+            foreach (ListViewItem viewItem in filelist.Items)
+            {
+                foreach (ListViewItem.ListViewSubItem items in viewItem.SubItems)
+                {
+                    if (items.Text == item)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
