@@ -175,7 +175,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
     <None Include="Resources\zpaq.ico" />
     <None Include="Resources\004-settings-cogwheel.png" />
     <None Include="Resources\003-search-in-folder.png" />
