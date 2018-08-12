@@ -94,7 +94,7 @@ namespace zpaq_GUI
                         foreach (ListViewItem item in listView1.Items)
                         {
                             if (item.SubItems[0].Text == file)
-                                item.SubItems[1].Text = fileSize;
+                                item.SubItems[2].Text = fileSize;
                         }
                     }
                     else
