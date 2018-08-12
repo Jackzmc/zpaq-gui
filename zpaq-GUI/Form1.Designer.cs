@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.filename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lastmodified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.settings_btn = new System.Windows.Forms.Button();
             this.files_add = new System.Windows.Forms.Button();
             this.files_remove = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.reportbug = new System.Windows.Forms.LinkLabel();
-            this.lastmodified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button1 = new System.Windows.Forms.Button();
             filesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
@@ -114,6 +114,11 @@
             this.filename.Text = "File Name";
             this.filename.Width = 507;
             // 
+            // lastmodified
+            // 
+            this.lastmodified.Text = "Last Modified";
+            this.lastmodified.Width = 176;
+            // 
             // settings_btn
             // 
             this.settings_btn.Location = new System.Drawing.Point(732, 24);
@@ -164,7 +169,7 @@
             this.start_btn.BackColor = System.Drawing.Color.PaleGreen;
             this.start_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.start_btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.start_btn.Location = new System.Drawing.Point(70, 348);
+            this.start_btn.Location = new System.Drawing.Point(70, 366);
             this.start_btn.Name = "start_btn";
             this.start_btn.Size = new System.Drawing.Size(113, 44);
             this.start_btn.TabIndex = 9;
@@ -231,16 +236,11 @@
             this.reportbug.Text = "Report Bug";
             this.reportbug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.reportbug_LinkClicked);
             // 
-            // lastmodified
-            // 
-            this.lastmodified.Text = "Last Modified";
-            this.lastmodified.Width = 176;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(85, 412);
+            this.button1.Location = new System.Drawing.Point(70, 416);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(113, 37);
             this.button1.TabIndex = 16;
             this.button1.Text = "Open Folder";
             this.button1.UseVisualStyleBackColor = true;
