@@ -263,6 +263,14 @@ namespace zpaq_GUI
             command_in.Text = command;
         }
 
-        
+        private void compressFile(String[] files, String savedir) {
+            String temp = Path.GetTempPath();
+            for (int i = 0; i < files.Length; i++) {
+                File.Move(files[i], $"{temp}/zpaq-gui/");
+            }
+            //move compress logic here
+            //File.Move(outputFile, savedir);
+        }
+
     }
 }
