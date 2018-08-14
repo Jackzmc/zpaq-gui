@@ -42,6 +42,7 @@
             this.filedate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.cmd_output = new System.Windows.Forms.RichTextBox();
+            this.label4 = new System.Windows.Forms.Label();
             filesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 10);
+            this.label1.Location = new System.Drawing.Point(15, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 0;
@@ -61,18 +62,18 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 26);
+            this.textBox1.Location = new System.Drawing.Point(16, 73);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(545, 20);
+            this.textBox1.Size = new System.Drawing.Size(591, 20);
             this.textBox1.TabIndex = 1;
             // 
             // saveloc_btn
             // 
             this.saveloc_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveloc_btn.Image = global::zpaq_GUI.Properties.Resources.browse;
-            this.saveloc_btn.Location = new System.Drawing.Point(566, 26);
+            this.saveloc_btn.Location = new System.Drawing.Point(613, 67);
             this.saveloc_btn.Name = "saveloc_btn";
-            this.saveloc_btn.Size = new System.Drawing.Size(75, 21);
+            this.saveloc_btn.Size = new System.Drawing.Size(75, 30);
             this.saveloc_btn.TabIndex = 2;
             this.saveloc_btn.Text = "Browse";
             this.saveloc_btn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -83,7 +84,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 59);
+            this.label2.Location = new System.Drawing.Point(13, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 3;
@@ -92,9 +93,9 @@
             // source_btn
             // 
             this.source_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.source_btn.Location = new System.Drawing.Point(566, 73);
+            this.source_btn.Location = new System.Drawing.Point(613, 17);
             this.source_btn.Name = "source_btn";
-            this.source_btn.Size = new System.Drawing.Size(75, 23);
+            this.source_btn.Size = new System.Drawing.Size(75, 30);
             this.source_btn.TabIndex = 5;
             this.source_btn.Text = "Choose";
             this.source_btn.UseVisualStyleBackColor = true;
@@ -102,15 +103,15 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(15, 75);
+            this.textBox2.Location = new System.Drawing.Point(16, 23);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(545, 20);
+            this.textBox2.Size = new System.Drawing.Size(591, 20);
             this.textBox2.TabIndex = 4;
             // 
             // extract_btn
             // 
             this.extract_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.extract_btn.Location = new System.Drawing.Point(16, 105);
+            this.extract_btn.Location = new System.Drawing.Point(34, 112);
             this.extract_btn.Name = "extract_btn";
             this.extract_btn.Size = new System.Drawing.Size(75, 37);
             this.extract_btn.TabIndex = 6;
@@ -125,9 +126,9 @@
             this.filename,
             this.filedate,
             filesize});
-            this.filelist.Location = new System.Drawing.Point(12, 170);
+            this.filelist.Location = new System.Drawing.Point(12, 210);
             this.filelist.Name = "filelist";
-            this.filelist.Size = new System.Drawing.Size(629, 176);
+            this.filelist.Size = new System.Drawing.Size(676, 176);
             this.filelist.TabIndex = 8;
             this.filelist.UseCompatibleStateImageBehavior = false;
             this.filelist.View = System.Windows.Forms.View.Details;
@@ -145,7 +146,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 154);
+            this.label3.Location = new System.Drawing.Point(15, 194);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 9;
@@ -153,18 +154,28 @@
             // 
             // cmd_output
             // 
-            this.cmd_output.Location = new System.Drawing.Point(97, 105);
+            this.cmd_output.Location = new System.Drawing.Point(144, 131);
             this.cmd_output.Name = "cmd_output";
             this.cmd_output.Size = new System.Drawing.Size(544, 59);
             this.cmd_output.TabIndex = 10;
             this.cmd_output.Text = "";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(152, 115);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Output";
             // 
             // ExtractGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(653, 358);
+            this.ClientSize = new System.Drawing.Size(700, 398);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cmd_output);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.filelist);
@@ -201,5 +212,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox cmd_output;
         private System.Windows.Forms.ColumnHeader filedate;
+        private System.Windows.Forms.Label label4;
     }
 }

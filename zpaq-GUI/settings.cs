@@ -44,9 +44,7 @@ namespace zpaq_GUI
         private void button1_Click(object sender, EventArgs e)
         {
             
-            Properties.Settings.Default.zpaq_gui = zpaq_path.Text;
-            Properties.Settings.Default.Save();
-            System.Diagnostics.Debug.WriteLine("SAVE " + Properties.Settings.Default.zpaq_gui);
+            //no need to save, just closes (should work fine?)
             this.Close(); //close settings window
         }
         private void settings_FormClosing(object sender, FormClosingEventArgs e)
@@ -61,40 +59,39 @@ namespace zpaq_GUI
             zpaq_path.Text = Properties.Settings.Default.zpaq_gui;
         }
 
-        private void check_fileassoc_CheckedChanged(object sender, EventArgs e) {
-            if(check_fileassoc.Checked) {
-                //run with admin - set file assoc
-                FileAssociationInfo fai = new FileAssociationInfo(".zpaq");
-                if (!fai.Exists) {
-                    fai.Create("zpaq_gui");
-                    //fai.ContentType = "application/zpaq"; //MIME type (is optional)
-                    fai.OpenWithList = new string[]{ "zpaq-gui.exe" };
-                }
-                ProgramAssociationInfo pai = new ProgramAssociationInfo(fai.ProgID);
-                if (!pai.Exists) {
-                    pai.Create
-                    (
-                    //Description of program/file type
-                    ".zpaq compression",
-
-                    new ProgramVerb
-                         (
-                         //Verb name
-                         "Open",
-                         //Path and arguments to use
-
-                         System.Reflection.Assembly.GetEntryAssembly().Location
-                         )
-                       );
-
-                    //optional
-                    pai.DefaultIcon = new ProgramIcon(@"C:\SomePath\SomeIcon.ico");
-                }
-            }
-        }
 
         private void label3_Click(object sender, EventArgs e) {
 
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            //run with admin - set file assoc
+            FileAssociationInfo fai = new FileAssociationInfo(".zpaq");
+            if (!fai.Exists) {
+                fai.Create("zpaq_gui");
+                //fai.ContentType = "application/zpaq"; //MIME type (is optional)
+                fai.OpenWithList = new string[] { "zpaq-gui.exe" };
+            }
+            ProgramAssociationInfo pai = new ProgramAssociationInfo(fai.ProgID);
+            if (!pai.Exists) {
+                pai.Create
+                (
+                //Description of program/file type
+                ".zpaq compression",
+
+                new ProgramVerb
+                     (
+                     //Verb name
+                     "Open",
+                     //Path and arguments to use
+
+                     System.Reflection.Assembly.GetEntryAssembly().Location
+                     )
+                   );
+
+                //optional
+                pai.DefaultIcon = new ProgramIcon(@"C:\SomePath\SomeIcon.ico");
+            }
         }
     }
 }

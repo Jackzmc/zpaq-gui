@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace zpaq_GUI
@@ -23,6 +24,7 @@ namespace zpaq_GUI
             if(args != "") {
                 String openedWithFile = args;
                 if (openedWithFile.EndsWith(".zpaq")) {
+                    Debug.WriteLine("Opened a .zpaq file, processing..");
                     //this.Show();
                     //this.initalizeWithFile(openedWithFile);
                     source_btn.Enabled = false;
@@ -31,8 +33,10 @@ namespace zpaq_GUI
                     sourceloc = openedWithFile;
 
                     // TODO: run command list, grab contents then print into listview
+
+                    //Somewhere a "the filename, directory name, or volume label syntax is incorrect"
                     String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" list \"" + sourceloc + "\"";
-                    System.Diagnostics.Debug.WriteLine(command);
+                    Debug.WriteLine(command);
                     var startInfo = new System.Diagnostics.ProcessStartInfo {
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
@@ -40,9 +44,16 @@ namespace zpaq_GUI
                         Arguments = "/c " + command
                     };
 
-                    System.Diagnostics.Process process = new System.Diagnostics.Process { StartInfo = startInfo };
+                    Process process = new Process { StartInfo = startInfo };
                     process.Start();
                     string output = process.StandardOutput.ReadToEnd();
+                    Debug.WriteLine("cmd output" + output);
+
+                    /*if (output == "") {
+                        //output will be blank if error
+                        MessageBox.Show("Something happened while opening the file.");
+                        return;
+                    }*/ //commented out as basic functionality should work fine
 
                     //Use REGEX to get the data we want
                     foreach (Match fileInfo in Regex.Matches(output, @"/^.*(- ).*$/gm")) {
@@ -53,9 +64,12 @@ namespace zpaq_GUI
                         //Get the file name.
                         string fileName = Regex.Matches(fileInfo.ToString(), $"/(?=A).*$/g")[0].ToString().Substring(1).Split(' ').ToString();
 
-                        if (!doesItemExist(fileName)) {
+                        if (doesItemExist(fileName)) {
+                            MessageBox.Show("[debug] processing");
                             string[] listViewInfo = { fileName, dateModified.ToString(), fileSize };
                             filelist.Items.Add(new ListViewItem(listViewInfo));
+                        } else {
+                            MessageBox.Show("Item does not exist");
                         }
                     }
                     process.WaitForExit();
@@ -97,7 +111,7 @@ namespace zpaq_GUI
                 sourceloc = dialog.FileName;
                 // TODO: run command list, grab contents then print into listview
                 String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" list \"" + sourceloc + "\"";
-                System.Diagnostics.Debug.WriteLine(command);
+                Debug.WriteLine(command);
                 var startInfo = new System.Diagnostics.ProcessStartInfo
                 {
                     UseShellExecute = false,
@@ -106,7 +120,7 @@ namespace zpaq_GUI
                     Arguments = "/c " + command
                 };
 
-                System.Diagnostics.Process process = new System.Diagnostics.Process { StartInfo = startInfo };
+                Process process = new Process { StartInfo = startInfo };
                 process.Start();
                 string output = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
@@ -143,7 +157,7 @@ namespace zpaq_GUI
                 Arguments = "/c " + command
             };
 
-            System.Diagnostics.Process process = new System.Diagnostics.Process {StartInfo = startInfo};
+            Process process = new Process { StartInfo = startInfo};
             process.Start();
             string output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();

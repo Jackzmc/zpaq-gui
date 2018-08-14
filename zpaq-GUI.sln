@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zpaq-GUI", "zpaq-GUI\zpaq-GUI.csproj", "{DE153A24-C06B-45D2-BDA7-235C211360BF}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{0B0725C9-5AA0-44A2-BC44-4BAF7A09AE28}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,9 +15,6 @@ Global
 		{DE153A24-C06B-45D2-BDA7-235C211360BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE153A24-C06B-45D2-BDA7-235C211360BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE153A24-C06B-45D2-BDA7-235C211360BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B0725C9-5AA0-44A2-BC44-4BAF7A09AE28}.Debug|Any CPU.ActiveCfg = Debug
-		{0B0725C9-5AA0-44A2-BC44-4BAF7A09AE28}.Release|Any CPU.ActiveCfg = Release
-		{0B0725C9-5AA0-44A2-BC44-4BAF7A09AE28}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
