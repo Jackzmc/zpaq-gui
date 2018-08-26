@@ -31,34 +31,59 @@ namespace zpaq_GUI
                     sourceloc = openedWithFile;
 
                     // TODO: run command list, grab contents then print into listview
-                    String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" list \"" + sourceloc + "\"";
-                    System.Diagnostics.Debug.WriteLine(command);
-                    var startInfo = new System.Diagnostics.ProcessStartInfo {
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        FileName = "cmd.exe",
-                        Arguments = "/c " + command
-                    };
 
-                    System.Diagnostics.Process process = new System.Diagnostics.Process { StartInfo = startInfo };
-                    process.Start();
-                    string output = process.StandardOutput.ReadToEnd();
+                    try {
+                        String command = "" + Properties.Settings.Default.zpaq_gui + " list " + sourceloc + "";
+                        System.Diagnostics.Debug.WriteLine(command);
+                        var startInfo = new System.Diagnostics.ProcessStartInfo {
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            FileName = "cmd.exe",
+                            Arguments = "/c " + command
+                        };
+                        System.Diagnostics.Process process = new System.Diagnostics.Process { StartInfo = startInfo };
+                        process.Start();
+                        string output = process.StandardOutput.ReadToEnd();
+                        //Use REGEX to get the data we want
+                        String[] outputlines = output.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
+                        Regex rgx = new Regex(@"/^.*(- ).*$/", RegexOptions.Singleline);
+                        foreach(String line in outputlines) {
+                            var match = rgx.Match(line);
+                            
+                            if (match.Success) {
+                                System.Diagnostics.Debug.WriteLine("??" + line);
+                                //Parse our date information
+                                DateTime dateModified = DateTime.Parse(Regex.Matches(line.ToString(), $"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]/gm")[0].ToString());
+                                //Grab and compress our file size;
+                                string fileSize = compressFileSize(long.Parse(Regex.Matches(line.ToString(), $"/.............(?= A)/g")[0].ToString()), out string byteType) + byteType;
+                                //Get the file name.
+                                string fileName = Regex.Matches(line.ToString(), $"/(?=A).*$/g")[0].ToString().Substring(1).Split(' ').ToString();
 
-                    //Use REGEX to get the data we want
-                    foreach (Match fileInfo in Regex.Matches(output, @"/^.*(- ).*$/gm")) {
-                        //Parse our date information
-                        DateTime dateModified = DateTime.Parse(Regex.Matches(fileInfo.ToString(), $"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]/gm")[0].ToString());
-                        //Grab and compress our file size;
-                        string fileSize = compressFileSize(long.Parse(Regex.Matches(fileInfo.ToString(), $"/.............(?= A)/g")[0].ToString()), out string byteType) + byteType;
-                        //Get the file name.
-                        string fileName = Regex.Matches(fileInfo.ToString(), $"/(?=A).*$/g")[0].ToString().Substring(1).Split(' ').ToString();
-
-                        if (!doesItemExist(fileName)) {
-                            string[] listViewInfo = { fileName, dateModified.ToString(), fileSize };
-                            filelist.Items.Add(new ListViewItem(listViewInfo));
+                                if (!doesItemExist(fileName)) {
+                                    string[] listViewInfo = { fileName, dateModified.ToString(), fileSize };
+                                    filelist.Items.Add(new ListViewItem(listViewInfo));
+                                }
+                            }
                         }
+                        /*foreach (Match fileInfo in rgx.Matches(output)) {
+                            System.Diagnostics.Debug.WriteLine(fileInfo);
+                            //Parse our date information
+                            DateTime dateModified = DateTime.Parse(Regex.Matches(fileInfo.ToString(), $"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]/gm")[0].ToString());
+                            //Grab and compress our file size;
+                            string fileSize = compressFileSize(long.Parse(Regex.Matches(fileInfo.ToString(), $"/.............(?= A)/g")[0].ToString()), out string byteType) + byteType;
+                            //Get the file name.
+                            string fileName = Regex.Matches(fileInfo.ToString(), $"/(?=A).*$/g")[0].ToString().Substring(1).Split(' ').ToString();
+                            
+                            if (!doesItemExist(fileName)) {
+                                string[] listViewInfo = { fileName, dateModified.ToString(), fileSize };
+                                filelist.Items.Add(new ListViewItem(listViewInfo));
+                            }
+                        }*/
+                        process.WaitForExit();
+                    }catch(Exception err) {
+                        MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    process.WaitForExit();
+                    
                 }
             }
             
