@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace zpaq_GUI
@@ -25,6 +26,7 @@ namespace zpaq_GUI
             if(args != "") {
                 String openedWithFile = args;
                 if (openedWithFile.EndsWith(".zpaq")) {
+                    Debug.WriteLine("Opened a .zpaq file, processing..");
                     //this.Show();
                     //this.initalizeWithFile(openedWithFile);
                     source_btn.Enabled = false;
@@ -126,7 +128,7 @@ namespace zpaq_GUI
                 sourceloc = dialog.FileName;
                 // TODO: run command list, grab contents then print into listview
                 String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" list \"" + sourceloc + "\"";
-                System.Diagnostics.Debug.WriteLine(command);
+                Debug.WriteLine(command);
                 var startInfo = new System.Diagnostics.ProcessStartInfo
                 {
                     UseShellExecute = false,
@@ -135,7 +137,7 @@ namespace zpaq_GUI
                     Arguments = "/c " + command
                 };
 
-                System.Diagnostics.Process process = new System.Diagnostics.Process { StartInfo = startInfo };
+                Process process = new Process { StartInfo = startInfo };
                 process.Start();
                 string output = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
@@ -172,7 +174,7 @@ namespace zpaq_GUI
                 Arguments = "/c " + command
             };
 
-            Process process = new System.Diagnostics.Process {StartInfo = startInfo};
+            Process process = new Process { StartInfo = startInfo};
             process.Start();
             var output = process.StandardOutput.ReadToEnd();
             cmd_output.Text = output;
