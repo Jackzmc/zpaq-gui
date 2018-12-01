@@ -147,9 +147,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 154);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Files (WIP)";
+            this.label3.Text = "Files";
             // 
             // cmd_output
             // 
