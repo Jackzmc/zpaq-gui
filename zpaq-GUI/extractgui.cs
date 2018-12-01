@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using Ookii.Dialogs.WinForms;
 
 namespace zpaq_GUI
 {
@@ -19,6 +20,9 @@ namespace zpaq_GUI
     {
         private String sourceloc;
         private String destloc;
+
+        //todo: make file list be a dir list?
+        //also possibly check if valid, and remove input by using the new OpenFolderDialog thing
 
         public ExtractGUI(String args)
         {
@@ -105,9 +109,9 @@ namespace zpaq_GUI
 
         }
 
-        private void saveloc_btn_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
+        private void saveloc_btn_Click(object sender, EventArgs e) {
+            VistaFolderBrowserDialog dialog = new VistaFolderBrowserDialog();
+            //FolderBrowserDialog dialog = new FolderBrowserDialog();
             //dialog.Multiselect = true;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -127,14 +131,13 @@ namespace zpaq_GUI
                 textBox2.Text = dialog.FileName;
                 sourceloc = dialog.FileName;
                 // TODO: run command list, grab contents then print into listview
-                String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" list \"" + sourceloc + "\"";
-                Debug.WriteLine(command);
                 var startInfo = new System.Diagnostics.ProcessStartInfo
                 {
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
-                    FileName = "CMD.EXE",
-                    Arguments = "/c " + command
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    FileName = Properties.Settings.Default.zpaq_gui,
+                    Arguments = $"list \"{sourceloc}\""
                 };
 
                 Process process = new Process { StartInfo = startInfo };
@@ -165,13 +168,12 @@ namespace zpaq_GUI
         private void extract_btn_Click(object sender, EventArgs e)
         {
             //TODO: checks for: sourceloc & destloc
-            String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" extract \"" + sourceloc + "\" -to \"" + destloc + "\"";
-            Debug.Print("EXTRACT RUN: {0}", command);
             var startInfo = new ProcessStartInfo {
+                WindowStyle = ProcessWindowStyle.Hidden,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
-                FileName = "CMD.EXE",
-                Arguments = "/c " + command
+                FileName = Properties.Settings.Default.zpaq_gui,
+                Arguments = $"extract \"{sourceloc}\" -to \"{destloc}\""
             };
 
             Process process = new Process { StartInfo = startInfo};
@@ -212,6 +214,10 @@ namespace zpaq_GUI
             return false;
         }
         private void ExtractGUI_Load(object sender, EventArgs e) {
+
+        }
+
+        private void filelist_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
     }

@@ -132,6 +132,7 @@
             this.filelist.TabIndex = 8;
             this.filelist.UseCompatibleStateImageBehavior = false;
             this.filelist.View = System.Windows.Forms.View.Details;
+            this.filelist.SelectedIndexChanged += new System.EventHandler(this.filelist_SelectedIndexChanged);
             // 
             // filename
             // 
@@ -154,16 +155,16 @@
             // 
             // cmd_output
             // 
-            this.cmd_output.Location = new System.Drawing.Point(144, 131);
+            this.cmd_output.Location = new System.Drawing.Point(144, 112);
             this.cmd_output.Name = "cmd_output";
-            this.cmd_output.Size = new System.Drawing.Size(544, 59);
+            this.cmd_output.Size = new System.Drawing.Size(544, 92);
             this.cmd_output.TabIndex = 10;
             this.cmd_output.Text = "";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(152, 115);
+            this.label4.Location = new System.Drawing.Point(141, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 11;

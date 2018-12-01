@@ -48,7 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.reportbug = new System.Windows.Forms.LinkLabel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.showFolder = new System.Windows.Forms.Button();
             filesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -110,6 +110,7 @@
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // filename
             // 
@@ -148,6 +149,7 @@
             // 
             // files_remove
             // 
+            this.files_remove.Enabled = false;
             this.files_remove.Location = new System.Drawing.Point(688, 314);
             this.files_remove.Name = "files_remove";
             this.files_remove.Size = new System.Drawing.Size(74, 23);
@@ -244,22 +246,23 @@
             this.reportbug.Text = "Report Bug";
             this.reportbug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.reportbug_LinkClicked);
             // 
-            // button1
+            // showFolder
             // 
-            this.button1.Location = new System.Drawing.Point(70, 416);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 37);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Open Folder";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.showFolder.Enabled = false;
+            this.showFolder.Location = new System.Drawing.Point(70, 416);
+            this.showFolder.Name = "showFolder";
+            this.showFolder.Size = new System.Drawing.Size(113, 37);
+            this.showFolder.TabIndex = 16;
+            this.showFolder.Text = "Open Folder";
+            this.showFolder.UseVisualStyleBackColor = true;
+            this.showFolder.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // ZPAQ_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 504);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.showFolder);
             this.Controls.Add(this.reportbug);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label3);
@@ -307,7 +310,7 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel reportbug;
         private System.Windows.Forms.ColumnHeader lastmodified;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button showFolder;
     }
 }
 

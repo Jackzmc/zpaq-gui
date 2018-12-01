@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO; //boi add this system.io
+using System.IO;
+using Ookii.Dialogs.WinForms;
+
+//boi add this system.io
 
 namespace zpaq_GUI
 {
@@ -20,15 +24,20 @@ namespace zpaq_GUI
             
         }
 
-        private void dest_btn_Click(object sender, EventArgs e)
-        {
+        private String finalFile;
+
+        private void dest_btn_Click(object sender, EventArgs e) {
+            
             SaveFileDialog file = new SaveFileDialog();
             file.Title = "Save Location";
             file.Filter = "Zpaq (*.zpaq)|*.zpaq";
             if (file.ShowDialog() == DialogResult.OK)
             {
+                showFolder.Enabled = false;
                 dest_txt.Text = file.FileName;
             }
+
+            finalFile = file.FileName;
             updateCommand();
         }
 
@@ -109,7 +118,7 @@ namespace zpaq_GUI
 
         private async void folders_add_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            VistaFolderBrowserDialog dialog = new VistaFolderBrowserDialog();
             //dialog.Multiselect = true;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -157,20 +166,18 @@ namespace zpaq_GUI
         private void button1_Click(object sender, EventArgs e) //on start btn, //TODO: rename
         {
             //TODO: check if dest folder exists
-            List<String> Files = new List<String>();
-            foreach (ListViewItem file in listView1.Items)
-            {
-                Files.Add(file.SubItems[0].Text);
+            List<String> files = new List<String>();
+            foreach (ListViewItem file in listView1.Items) {
+                files.Add($"\"{file.SubItems[0].Text}\"");
             }
-            String command = "\"" + Properties.Settings.Default.zpaq_gui + "\" add \"" + dest_txt.Text + "\" " + String.Join(" ", Files.ToArray());
-
+            var spacedFiles = String.Join(" ", files.ToArray());
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             var startInfo = new System.Diagnostics.ProcessStartInfo
             {
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
-                FileName = "cmd.exe",
-                Arguments = "/c" + command,
+                FileName = Properties.Settings.Default.zpaq_gui,
+                Arguments = $"add \"{dest_txt.Text}\" {spacedFiles}"
             };
             process.StartInfo = startInfo;
             process.Start();
@@ -180,6 +187,7 @@ namespace zpaq_GUI
             if (File.Exists(dest_txt.Text))
             {
                 MessageBox.Show("The process is complete.\nFinal File Size: " + compressFileSize(new FileInfo(dest_txt.Text).Length, out string type) + type, "ZPAQ GUI", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                showFolder.Enabled = true;
             }
             else
             {
@@ -204,7 +212,6 @@ namespace zpaq_GUI
         private void button2_Click(object sender, EventArgs e) //extract gui btn
         {
             //ExtractGUI extractor = new ExtractGUI();
-            
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Zpaq (*.zpaq)|*.zpaq";
             if (dialog.ShowDialog() == DialogResult.OK) {
@@ -239,6 +246,7 @@ namespace zpaq_GUI
             }
         }
         private void button1_Click_1(object sender, EventArgs e) {
+            Process.Start("explorer.exe", $"/select, {finalFile}");
             //this button could show when it is complete
         }
         /* functions */
@@ -272,5 +280,8 @@ namespace zpaq_GUI
             //File.Move(outputFile, savedir);
         }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
+            files_remove.Enabled = listView1.SelectedItems.Count > 0;
+        }
     }
 }

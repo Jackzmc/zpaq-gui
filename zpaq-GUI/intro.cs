@@ -15,11 +15,15 @@ namespace zpaq_GUI {
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.Process.Start("http://mattmahoney.net/dc/zpaq715.zip");
+           
         }
 
         private void label2_Click(object sender, EventArgs e) {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("http://mattmahoney.net/dc/zpaq715.zip");
         }
     }
 }
